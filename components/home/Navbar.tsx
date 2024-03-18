@@ -5,6 +5,7 @@ import { ThemeButton } from "../theme/ThemeButton";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { PlayIcon } from "@radix-ui/react-icons";
+import { CodeInput } from "../code/CodeInputComponent";
 
 interface NavbarProps {
   user: {
@@ -38,7 +39,7 @@ const Navbar: React.FC<NavbarProps> = ({ user, setSubmitButtonClicked }) => {
           <div>
             <ThemeButton />
           </div>
-          {user.name && user.language ? (
+          {/* {user.name && user.language ? (
             <>
               <Button
                 className="inline-block md:hidden"
@@ -53,7 +54,8 @@ const Navbar: React.FC<NavbarProps> = ({ user, setSubmitButtonClicked }) => {
                 <PlayIcon />
               </Button>
             </>
-          ) : null}
+          ) : null} */}
+          <CodeInput />
         </div>
       </div>
     </nav>

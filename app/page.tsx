@@ -1,6 +1,6 @@
 "use client";
 
-import CodePlayground from "@/components/home/CodePlayground";
+import CodePlayground from "@/components/code/CodePlayground";
 import Navbar from "@/components/home/Navbar";
 import UserModal from "@/components/home/userModal";
 import { useEffect, useState } from "react";
