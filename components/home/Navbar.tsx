@@ -1,11 +1,12 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { Combobox } from "../ui/combobox";
 import { ThemeButton } from "../theme/ThemeButton";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { PlayIcon } from "@radix-ui/react-icons";
 import { CodeInput } from "../code/CodeInputComponent";
+import { Toast } from "@radix-ui/react-toast";
 
 interface NavbarProps {
   user: {
@@ -13,8 +14,13 @@ interface NavbarProps {
     language: string;
   };
   setSubmitButtonClicked: Function;
+  submitButtonClicked: Boolean;
 }
-const Navbar: React.FC<NavbarProps> = ({ user, setSubmitButtonClicked }) => {
+const Navbar: React.FC<NavbarProps> = ({
+  user,
+  setSubmitButtonClicked,
+  submitButtonClicked,
+}) => {
   return (
     <nav className="py-5 h-fit">
       <div className="flex justify-between items-center">
@@ -55,7 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({ user, setSubmitButtonClicked }) => {
               </Button>
             </>
           ) : null} */}
-          <CodeInput />
+          <CodeInput setSubmitButtonClicked={setSubmitButtonClicked} />
         </div>
       </div>
     </nav>

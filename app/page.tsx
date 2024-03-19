@@ -6,8 +6,10 @@ import UserModal from "@/components/home/userModal";
 import { useEffect, useState } from "react";
 import axios from "axios";
 type User = {
+  id: number;
   name: string;
   language: string;
+  syntax: string;
 };
 
 export default function Home() {
@@ -16,12 +18,16 @@ export default function Home() {
 
   return (
     <main className=" h-full w-full">
-      <Navbar user={userInfo} setSubmitButtonClicked={setSubmitClicked} />
+      <Navbar
+        user={userInfo}
+        setSubmitButtonClicked={setSubmitClicked}
+        submitButtonClicked={submitButtonClicked}
+      />
       {userInfo.name ? (
         <div className="">
-          {/* <Navbar user={userInfo} setSubmitButtonClicked={setSubmitClicked} /> */}
           <CodePlayground
             user={userInfo}
+            setSubmitButtonClicked={setSubmitClicked}
             submitButtonClicked={submitButtonClicked}
           />
         </div>
