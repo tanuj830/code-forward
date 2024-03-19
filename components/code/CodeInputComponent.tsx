@@ -20,12 +20,31 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Badge } from "../ui/badge";
+import axios from "axios";
 
 interface CodeInputProps {
   setSubmitButtonClicked: Function;
+  submitButtonClicked: Boolean;
+  userInfo: {
+    _id: string;
+    name: string;
+    Date: string;
+    language: string;
+    userSubmisson: [
+      {
+        sourceCode: string;
+        output: string;
+        Date: string;
+      }
+    ];
+  };
 }
 
-export function CodeInput({ setSubmitButtonClicked }: CodeInputProps) {
+export function CodeInput({
+  setSubmitButtonClicked,
+  userInfo,
+  submitButtonClicked,
+}: CodeInputProps) {
   const handleCodeSubmisson = () => {
     setSubmitButtonClicked(true);
   };
@@ -33,15 +52,11 @@ export function CodeInput({ setSubmitButtonClicked }: CodeInputProps) {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        {/* <Button variant="outline">Input</Button> */}
-        <Button
-        //   className="inline-block md:hidden"
-        // onClick={() => setSubmitButtonClicked(true)}
-        >
+        <Button>
           <PlayIcon />
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="    ">
+      <DrawerContent className="">
         <div className="flex h-full justify-center items-center py-4">
           <div className=" w-full md:w-[70%] lg:w-[50%] xl:w-[40%] ">
             <DrawerHeader className="">
@@ -51,7 +66,7 @@ export function CodeInput({ setSubmitButtonClicked }: CodeInputProps) {
                 </div>
                 <Button
                   className="flex gap-2 items-center"
-                  onClick={() => handleCodeSubmisson}
+                  onClick={handleCodeSubmisson}
                 >
                   <CodeIcon height={20} width={20} /> <span> Submit Code</span>
                 </Button>

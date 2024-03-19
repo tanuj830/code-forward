@@ -20,20 +20,52 @@ import {
 } from "@/components/ui/select";
 import { languages } from "@/constants/languages";
 import { Badge } from "../ui/badge";
+import axios from "axios";
+import { userInfo } from "os";
 
 interface UserModalProps {
   setUserInfo: Function;
+  setShowUserModel: Function;
+  showUserModel: Boolean;
 }
 
-const UserModal: React.FC<UserModalProps> = ({ setUserInfo }) => {
+const UserModal: React.FC<UserModalProps> = ({
+  setUserInfo,
+  setShowUserModel,
+  showUserModel,
+}) => {
   const [name, setName] = React.useState("");
   const [language, setLanguage] = React.useState("");
   const [error, setError] = React.useState("");
+
+  React.useEffect(() => {
+    const name = window.localStorage.getItem("name");
+    const language = window.localStorage.getItem("language");
+    if (!name || !language) {
+      setShowUserModel(true);
+    } else {
+      setShowUserModel(false);
+    }
+  }, [showUserModel]);
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (name.length > 0 && language.length > 0) {
       const result = { name: name, language: language };
-      setUserInfo(result);
+      const lang = languages.find((lang) => lang.value === language);
+      axios.post("http://localhost:8000/user", result).then((res) => {
+        window.localStorage.setItem("name", result.name);
+        window.localStorage.setItem("language", result.language);
+        if (lang) {
+          window.localStorage.setItem("languageID", JSON.stringify(lang.id));
+          window.localStorage.setItem("syntax", lang?.syntax);
+          window.localStorage.setItem("userID", res.data._id); //user mongodb id
+        }
+
+        // setUserInfo(res.data);
+
+        setShowUserModel(false);
+      });
     } else {
       setError("Fill all credentials");
       setTimeout(() => {

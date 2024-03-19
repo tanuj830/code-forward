@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Combobox } from "../ui/combobox";
 import { ThemeButton } from "../theme/ThemeButton";
 import { Badge } from "../ui/badge";
@@ -10,8 +10,19 @@ import { Toast } from "@radix-ui/react-toast";
 
 interface NavbarProps {
   user: {
+    languageId: number;
+    _id: string;
     name: string;
+    Date: string;
     language: string;
+    userSubmisson: [
+      {
+        sourceCode: string;
+        output: string;
+        Date: string;
+      }
+    ];
+    syntax: string;
   };
   setSubmitButtonClicked: Function;
   submitButtonClicked: Boolean;
@@ -21,6 +32,16 @@ const Navbar: React.FC<NavbarProps> = ({
   setSubmitButtonClicked,
   submitButtonClicked,
 }) => {
+  const [name, setName] = useState("" as any);
+  const [language, setLanguage] = useState("" as any);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setName(window.localStorage.getItem("name"));
+      setLanguage(window.localStorage.getItem("language"));
+    }
+  });
+
   return (
     <nav className="py-5 h-fit">
       <div className="flex justify-between items-center">
@@ -30,14 +51,14 @@ const Navbar: React.FC<NavbarProps> = ({
           </Link>
         </div>
         <div className="flex items-center gap-1 md:gap-5">
-          {user.name && user.language ? (
+          {name && language ? (
             <>
               <div>
-                <Badge variant={"secondary"}>{user.language}</Badge>
+                <Badge variant={"secondary"}>{language}</Badge>
               </div>
               <div>
                 <Button variant={"secondary"} className="rounded-full p-3  ">
-                  {user.name.slice(0, 2)}
+                  {name.slice(0, 2)}
                 </Button>
               </div>
             </>
@@ -61,7 +82,13 @@ const Navbar: React.FC<NavbarProps> = ({
               </Button>
             </>
           ) : null} */}
-          <CodeInput setSubmitButtonClicked={setSubmitButtonClicked} />
+          {name && language ? (
+            <CodeInput
+              setSubmitButtonClicked={setSubmitButtonClicked}
+              submitButtonClicked={submitButtonClicked}
+              userInfo={user}
+            />
+          ) : null}
         </div>
       </div>
     </nav>

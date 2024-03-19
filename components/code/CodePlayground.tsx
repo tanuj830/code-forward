@@ -5,88 +5,116 @@ import { useTheme } from "next-themes";
 import axios from "axios";
 import { languages } from "@/constants/languages";
 import { encode, decode } from "js-base64";
+// import { userInfo } from "os";
 
 interface CodePlayProps {
-  user: {
-    id: number;
-    name: string;
-    language: string;
-    syntax: string;
-  };
+  // user: {
+  //   id: number;
+  //   _id: string;
+  //   name: string;
+  //   Date: string;
+  //   language: string;
+  //   userSubmisson: [
+  //     {
+  //       sourceCode: string;
+  //       output: string;
+  //       Date: string;
+  //     }
+  //   ];
+  //   syntax: string;
+  // };
   submitButtonClicked: Boolean;
   setSubmitButtonClicked: Function;
+  setUserInfo: Function;
 }
 
 const CodePlayground: React.FC<CodePlayProps> = ({
-  user,
+  // user,
+  setUserInfo,
   submitButtonClicked,
   setSubmitButtonClicked,
 }) => {
-  // finding default syntax of user's prefered language
-  const defaultSyntax = languages.find((lang) => lang.value === user.language);
-
   const getTheme = useTheme();
-  const [code, setCode] = useState(defaultSyntax?.syntax);
-  // const [output, setOutput] = useState({} as any);
+
+  const defaultSyntax = window.localStorage.getItem("syntax");
+  const userID = window.localStorage.getItem("userID");
+  const language = window.localStorage.getItem("language");
+  const languageID = JSON.parse(
+    window.localStorage.getItem("languageID") || ""
+  );
+
+  const [code, setCode] = useState(defaultSyntax);
+  const [output, setOutput] = useState({} as any);
 
   const handleCode = (value: any, event: any) => {
     setCode(value);
   };
+  //   output
+  // "SGVsbG8gV29ybGQK
+  // "
 
-  if (submitButtonClicked === true && defaultSyntax) {
-    setSubmitButtonClicked(false);
-    console.log(code);
-    // const options = {
-    //   method: "POST",
-    //   url: "https://judge0-ce.p.rapidapi.com/submissions",
-    //   params: {
-    //     base64_encoded: "true",
-    //   },
-    //   headers: {
-    //     "content-type": "application/json",
-    //     "Content-Type": "application/json",
-    //     "X-RapidAPI-Key": "b8fbf23572msh5937faec3ef7c60p1d7c92jsnfb7c9fddb975",
-    //     "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
-    //   },
-    //   data: {
-    //     language_id: defaultSyntax.id,
-    //     source_code: btoa(code || defaultSyntax.syntax),
-    //   },
-    // };
-    // axios.request(options).then((res) => {
-    //   // console.log(res.data.token);
-    //   if (res.data.token) {
-    //     const options = {
-    //       method: "GET",
-    //       url: `https://judge0-ce.p.rapidapi.com/submissions/$  {res.data.token}`,
-    //       params: {
-    //         base64_encoded: "true",
-    //       },
-    //       headers: {
-    //         "X-RapidAPI-Key":
-    //           "b8fbf23572msh5937faec3ef7c60p1d7c92jsnfb7c9fddb975",
-    //         "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
-    //       },
-    //     };
-    //     axios.request(options).then((res) => setOutput(res.data));
-    //   }
-    // });
+  if (submitButtonClicked === true && code) {
+    const options = {
+      method: "POST",
+      url: "https://judge0-ce.p.rapidapi.com/submissions",
+      params: {
+        base64_encoded: "true",
+      },
+      headers: {
+        "content-type": "application/json",
+        "Content-Type": "application/json",
+        "X-RapidAPI-Key": "b8fbf23572msh5937faec3ef7c60p1d7c92jsnfb7c9fddb975",
+        "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
+      },
+      data: {
+        language_id: languageID,
+        source_code: btoa(code),
+      },
+    };
+    axios.request(options).then((res) => {
+      if (res.data.token) {
+        const options = {
+          method: "GET",
+          url: `https://judge0-ce.p.rapidapi.com/submissions/${res.data.token}`,
+          params: {
+            base64_encoded: "true",
+          },
+          headers: {
+            "X-RapidAPI-Key":
+              "b8fbf23572msh5937faec3ef7c60p1d7c92jsnfb7c9fddb975",
+            "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
+          },
+        };
+        axios.request(options).then((res) => {
+          console.log(res.data);
+          axios
+            .put(`http://localhost:8000/user/submit-code/${userID}`, {
+              sourceCode: code,
+              output:
+                res.data.stdout != null ? res.data.stdout : res.data.stderr,
+              Date: Date.now(),
+            })
+            .then((res) => {
+              console.log(res.data);
+              setSubmitButtonClicked(false);
+              // console.log(output);
+            });
+        });
+      }
+    });
   }
+
   return (
     <div className="bg-secondary h-[80vh] mt-5 rounded-lg overflow-hidden ">
       <Editor
         theme={getTheme.theme === "dark" ? "vs-dark" : "light"}
         className={`${getTheme.theme === "light" ? "border" : ""}`}
         height="80vh"
-        language={user.language}
+        language={language || ""}
         onChange={handleCode}
         defaultValue={
-          "// You can write your " +
-          user.language +
-          " code \n" +
-          defaultSyntax?.syntax
+          "// You can write your " + language + " code \n" + defaultSyntax
         }
-        // defaultValue={user.syntax}
       />
     </div>
   );

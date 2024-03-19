@@ -21,7 +21,7 @@ export const languages = [
     id:63,
     value: "javascript",
     label: "Javascript",
-    syntax:'print("Hello World")'
+    syntax:'console.log("Hello World")'
   },
   {
     id:70,
