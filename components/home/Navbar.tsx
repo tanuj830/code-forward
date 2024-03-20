@@ -7,6 +7,16 @@ import { Button } from "../ui/button";
 import { PlayIcon } from "@radix-ui/react-icons";
 import { CodeInput } from "../code/CodeInputComponent";
 import { Toast } from "@radix-ui/react-toast";
+import { userInfo } from "os";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import UserDropDown from "./userDropDown";
 
 interface NavbarProps {
   user: {
@@ -56,11 +66,9 @@ const Navbar: React.FC<NavbarProps> = ({
               <div>
                 <Badge variant={"secondary"}>{language}</Badge>
               </div>
-              <div>
-                <Button variant={"secondary"} className="rounded-full p-3  ">
-                  {name.slice(0, 2)}
-                </Button>
-              </div>
+              {/* <div className="flex justify-center items-center"> */}
+              <UserDropDown name={name} />
+              {/* </div> */}
             </>
           ) : null}
           <div>

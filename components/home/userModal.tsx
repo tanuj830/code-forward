@@ -53,19 +53,21 @@ const UserModal: React.FC<UserModalProps> = ({
     if (name.length > 0 && language.length > 0) {
       const result = { name: name, language: language };
       const lang = languages.find((lang) => lang.value === language);
-      axios.post("http://localhost:8000/user", result).then((res) => {
-        window.localStorage.setItem("name", result.name);
-        window.localStorage.setItem("language", result.language);
-        if (lang) {
-          window.localStorage.setItem("languageID", JSON.stringify(lang.id));
-          window.localStorage.setItem("syntax", lang?.syntax);
-          window.localStorage.setItem("userID", res.data._id); //user mongodb id
-        }
+      axios
+        .post("https://code-forward-backend.onrender.com/user", result)
+        .then((res) => {
+          window.localStorage.setItem("name", result.name);
+          window.localStorage.setItem("language", result.language);
+          if (lang) {
+            window.localStorage.setItem("languageID", JSON.stringify(lang.id));
+            window.localStorage.setItem("syntax", lang?.syntax);
+            window.localStorage.setItem("userID", res.data._id); //user mongodb id
+          }
 
-        // setUserInfo(res.data);
+          // setUserInfo(res.data);
 
-        setShowUserModel(false);
-      });
+          setShowUserModel(false);
+        });
     } else {
       setError("Fill all credentials");
       setTimeout(() => {

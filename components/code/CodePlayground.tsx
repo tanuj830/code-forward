@@ -63,7 +63,7 @@ const CodePlayground: React.FC<CodePlayProps> = ({
       headers: {
         "content-type": "application/json",
         "Content-Type": "application/json",
-        "X-RapidAPI-Key": "b8fbf23572msh5937faec3ef7c60p1d7c92jsnfb7c9fddb975",
+        "X-RapidAPI-Key": "bf0c75fb4amsh59e693748ea85b7p1271fajsn3b874788bc2e",
         "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
       },
       data: {
@@ -81,19 +81,22 @@ const CodePlayground: React.FC<CodePlayProps> = ({
           },
           headers: {
             "X-RapidAPI-Key":
-              "b8fbf23572msh5937faec3ef7c60p1d7c92jsnfb7c9fddb975",
+              "bf0c75fb4amsh59e693748ea85b7p1271fajsn3b874788bc2e",
             "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
           },
         };
         axios.request(options).then((res) => {
           console.log(res.data);
           axios
-            .put(`http://localhost:8000/user/submit-code/${userID}`, {
-              sourceCode: code,
-              output:
-                res.data.stdout != null ? res.data.stdout : res.data.stderr,
-              Date: Date.now(),
-            })
+            .put(
+              `https://code-forward-backend.onrender.com/user/submit-code/${userID}`,
+              {
+                sourceCode: code,
+                output:
+                  res.data.stdout != null ? res.data.stdout : res.data.stderr,
+                Date: Date.now(),
+              }
+            )
             .then((res) => {
               console.log(res.data);
               setSubmitButtonClicked(false);
@@ -112,9 +115,7 @@ const CodePlayground: React.FC<CodePlayProps> = ({
         height="80vh"
         language={language || ""}
         onChange={handleCode}
-        defaultValue={
-          "// You can write your " + language + " code \n" + defaultSyntax
-        }
+        defaultValue={defaultSyntax || ""}
       />
     </div>
   );
