@@ -12,12 +12,6 @@ export const languages = [
     syntax:'console.log("Hello World")'
   },
   {
-    id:74,
-    value: "typescript",
-    label: "TypeScript",
-    syntax:'let message: string = "Hello, World!"; \n  console.log(message);',
-  },
-  {
     id:70,
     value: "python",
     label: "Python",
