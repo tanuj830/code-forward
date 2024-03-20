@@ -5,6 +5,7 @@ import {
   MinusIcon,
   PlayIcon,
   PlusIcon,
+  SymbolIcon,
 } from "@radix-ui/react-icons";
 // import { Bar, BarChart, ResponsiveContainer } from "recharts"
 
@@ -68,7 +69,21 @@ export function CodeInput({
                   className="flex gap-2 items-center"
                   onClick={handleCodeSubmisson}
                 >
-                  <CodeIcon height={20} width={20} /> <span> Submit Code</span>
+                  {submitButtonClicked === true ? (
+                    <span className="flex items-center gap-2">
+                      <SymbolIcon
+                        className="animate-spin"
+                        height={16}
+                        width={16}
+                      />{" "}
+                      <span> Submit Code</span>
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-2 ">
+                      <CodeIcon className="" height={20} width={20} />{" "}
+                      <span> Submit Code</span>
+                    </span>
+                  )}
                 </Button>
               </div>
               <span className="text-start text-xs text-muted-foreground mt-4">
