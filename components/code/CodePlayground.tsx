@@ -26,10 +26,11 @@ interface CodePlayProps {
   submitButtonClicked: Boolean;
   setSubmitButtonClicked: Function;
   setUserInfo: Function;
+  stdin: string;
 }
 
 const CodePlayground: React.FC<CodePlayProps> = ({
-  // user,
+  stdin,
   setUserInfo,
   submitButtonClicked,
   setSubmitButtonClicked,
@@ -69,6 +70,7 @@ const CodePlayground: React.FC<CodePlayProps> = ({
       data: {
         language_id: languageID,
         source_code: btoa(code),
+        stdin: btoa(stdin),
       },
     };
     axios.request(options).then((res) => {
@@ -92,6 +94,7 @@ const CodePlayground: React.FC<CodePlayProps> = ({
               `https://code-forward-backend.onrender.com/user/submit-code/${userID}`,
               {
                 sourceCode: code,
+                input: stdin,
                 output:
                   res.data.stdout != null ? res.data.stdout : res.data.stderr,
                 Date: Date.now(),

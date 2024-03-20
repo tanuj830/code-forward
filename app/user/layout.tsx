@@ -15,12 +15,14 @@ export default function RootLayout({
   const [userInfo, setUserInfo] = useState({} as any);
   const [showUserModel, setShowUserModel] = useState(true);
   const [submitButtonClicked, setSubmitButtonClicked] = useState(false);
+  const stdin = () => {};
   return (
     <html lang="en">
       <body className={inter.className}>
         <div className="px-5 md:px-10 lg:px-20 xl:px-40  h-screen overflow-hidden">
           <Navbar
             user={userInfo}
+            setStdin={stdin}
             submitButtonClicked={submitButtonClicked}
             setSubmitButtonClicked={setSubmitButtonClicked}
           />

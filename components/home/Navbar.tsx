@@ -35,12 +35,14 @@ interface NavbarProps {
     syntax: string;
   };
   setSubmitButtonClicked: Function;
+  setStdin: Function;
   submitButtonClicked: Boolean;
 }
 const Navbar: React.FC<NavbarProps> = ({
   user,
   setSubmitButtonClicked,
   submitButtonClicked,
+  setStdin,
 }) => {
   const [name, setName] = useState("" as any);
   const [language, setLanguage] = useState("" as any);
@@ -53,7 +55,7 @@ const Navbar: React.FC<NavbarProps> = ({
   });
 
   return (
-    <nav className="py-5 h-fit">
+    <nav className="py-5 h-fit z-[1000] ">
       <div className="flex justify-between items-center">
         <div>
           <Link className="font-bold text-md md:text-xl" href="/">
@@ -74,24 +76,9 @@ const Navbar: React.FC<NavbarProps> = ({
           <div>
             <ThemeButton />
           </div>
-          {/* {user.name && user.language ? (
-            <>
-              <Button
-                className="inline-block md:hidden"
-                onClick={() => setSubmitButtonClicked(true)}
-              >
-                <PlayIcon />
-              </Button>
-              <Button
-                className="hidden md:inline-block"
-                onClick={() => setSubmitButtonClicked(true)}
-              >
-                <PlayIcon />
-              </Button>
-            </>
-          ) : null} */}
           {name && language ? (
             <CodeInput
+              setStdin={setStdin}
               setSubmitButtonClicked={setSubmitButtonClicked}
               submitButtonClicked={submitButtonClicked}
               userInfo={user}

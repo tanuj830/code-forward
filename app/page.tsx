@@ -25,15 +25,17 @@ export default function Home() {
   const [userInfo, setUserInfo] = useState({} as User);
   const [showUserModel, setShowUserModel] = useState(true);
   const [submitButtonClicked, setSubmitButtonClicked] = useState(false);
+  const [stdin, setStdin] = useState("");
   return (
     <main className=" h-full w-full">
       <Navbar
+        setStdin={setStdin}
         user={userInfo}
         submitButtonClicked={submitButtonClicked}
         setSubmitButtonClicked={setSubmitButtonClicked}
       />
       {showUserModel === true ? (
-        <div className="h-full w-full flex justify-center items-center -translate-y-[10%]">
+        <div className="h-full w-full flex justify-center items-center ">
           <UserModal
             setUserInfo={setUserInfo}
             setShowUserModel={setShowUserModel}
@@ -43,7 +45,7 @@ export default function Home() {
       ) : (
         <div className="">
           <CodePlayground
-            // user={userInfo}
+            stdin={stdin}
             setUserInfo={setUserInfo}
             setSubmitButtonClicked={setSubmitButtonClicked}
             submitButtonClicked={submitButtonClicked}

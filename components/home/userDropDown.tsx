@@ -24,7 +24,12 @@ const UserDropDown = ({ name }: UserDropDownProps) => {
   }, []);
   const deleteUser = () => {
     if (typeof window !== "undefined") {
-      window.localStorage.clear();
+      window.localStorage.removeItem("name");
+      window.localStorage.removeItem("userID");
+      window.localStorage.removeItem("language");
+      window.localStorage.removeItem("languageID");
+      window.localStorage.removeItem("syntax");
+      window.location.reload();
     }
   };
   return (

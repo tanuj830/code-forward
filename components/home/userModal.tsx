@@ -76,7 +76,7 @@ const UserModal: React.FC<UserModalProps> = ({
     }
   };
   return (
-    <Card className="w-[380px]  ">
+    <Card className="w-[380px] -translate-y-[10%] ">
       <CardHeader>
         <CardTitle>Code Forward</CardTitle>
         <CardDescription>

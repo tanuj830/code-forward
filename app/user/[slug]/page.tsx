@@ -11,6 +11,7 @@ type userinfo = {
     {
       sourceCode: string;
       Date: string;
+      input: string;
       output: string;
     }
   ];

@@ -17,6 +17,7 @@ interface UserProps {
     userSubmisson: [
       {
         sourceCode: string;
+        input: string;
         Date: string;
         output: string;
       }
@@ -47,13 +48,16 @@ const UserTable = ({ userInfo }: UserProps) => {
           </TableRow>
         </TableHeader>
         <TableBody className="border-t border-muted">
-          {Object.keys(userInfo).length > 0
-            ? userInfo.userSubmisson.map((submisson) => (
+          {userInfo
+            ? userInfo.userSubmisson?.map((submisson) => (
                 <TableRow className="bg-muted/40 hover:bg-secondary ">
                   <TableCell className="font-medium">{userInfo.name}</TableCell>
                   <TableCell>{userInfo.language}</TableCell>
-                  {/* <TableCell>{submisson.stdin}</TableCell> */}
-                  <TableCell>1,2</TableCell>
+                  <TableCell>
+                    {submisson?.input?.length > 0
+                      ? atob(submisson.input)
+                      : "null"}
+                  </TableCell>
                   <TableCell className="text-right">{submisson.Date}</TableCell>
                   <TableCell className="text-right ">
                     {submisson.sourceCode.length > 0

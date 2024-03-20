@@ -24,6 +24,7 @@ import { Badge } from "../ui/badge";
 import axios from "axios";
 
 interface CodeInputProps {
+  setStdin: Function;
   setSubmitButtonClicked: Function;
   submitButtonClicked: Boolean;
   userInfo: {
@@ -44,6 +45,7 @@ interface CodeInputProps {
 export function CodeInput({
   setSubmitButtonClicked,
   userInfo,
+  setStdin,
   submitButtonClicked,
 }: CodeInputProps) {
   const handleCodeSubmisson = () => {
@@ -91,6 +93,7 @@ export function CodeInput({
                 redirect you to your profile page.
               </span>
               <textarea
+                onChange={(e) => setStdin(e.target.value)}
                 name=""
                 id=""
                 className="bg-secondary w-full h-40 outline-none mt-1 rounded-lg p-1"
