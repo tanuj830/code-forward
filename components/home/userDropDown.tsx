@@ -47,7 +47,7 @@ const UserDropDown = ({ name }: UserDropDownProps) => {
           </DropdownMenuItem>
           {/* Deleting user will not delete data from database(this will helps you in getting insights of user and if you want to delete data from database too you have to only fire one delete query to database) */}
           <DropdownMenuItem
-            onClick={() => deleteUser}
+            onClick={deleteUser}
             className="bg-destructive/15 hover:bg-destructive mt-2 hover:text-white"
           >
             Delete User
