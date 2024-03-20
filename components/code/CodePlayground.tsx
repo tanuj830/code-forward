@@ -56,7 +56,7 @@ const CodePlayground: React.FC<CodePlayProps> = ({
   if (submitButtonClicked === true && code) {
     const options = {
       method: "POST",
-      url: "https://judge0-ce.p.rapidapi.com/submissions",
+      url: "http://judge0-ce.p.rapidapi.com/submissions",
       params: {
         base64_encoded: "true",
       },
@@ -75,7 +75,7 @@ const CodePlayground: React.FC<CodePlayProps> = ({
       if (res.data.token) {
         const options = {
           method: "GET",
-          url: `https://judge0-ce.p.rapidapi.com/submissions/${res.data.token}`,
+          url: `http://judge0-ce.p.rapidapi.com/submissions/${res.data.token}`,
           params: {
             base64_encoded: "true",
           },
@@ -89,7 +89,7 @@ const CodePlayground: React.FC<CodePlayProps> = ({
           console.log(res.data);
           axios
             .put(
-              `https://code-forward-backend.onrender.com/user/submit-code/${userID}`,
+              `http://code-forward-backend.onrender.com/user/submit-code/${userID}`,
               {
                 sourceCode: code,
                 output:

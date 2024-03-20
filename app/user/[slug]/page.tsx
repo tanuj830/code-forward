@@ -27,7 +27,7 @@ const page = () => {
       router.push("/");
     } else {
       axios
-        .get(`https://code-forward-backend.onrender.com/user/${_id}`)
+        .get(`http://code-forward-backend.onrender.com/user/${_id}`)
         .then((res) => setUserInfo(res.data[0]));
     }
   }, []);
