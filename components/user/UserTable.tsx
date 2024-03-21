@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -8,7 +7,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import axios from "axios";
 
 interface UserProps {
   userInfo: {
@@ -25,14 +23,6 @@ interface UserProps {
   };
 }
 const UserTable = ({ userInfo }: UserProps) => {
-  //   useEffect(() => {
-  //     if (typeof window !== "undefined") {
-  //       const id = window.localStorage.getItem("userID");
-  //       axios
-  //         .get(`http://localhost:8000/user/${id}`)
-  //         .then((res) => console.log(res.data));
-  //     }
-  //   }, []);
   return (
     <div>
       <Table>

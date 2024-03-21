@@ -1,10 +1,8 @@
 "use client";
-
+import React from "react";
 import CodePlayground from "@/components/code/CodePlayground";
 import Navbar from "@/components/home/Navbar";
 import UserModal from "@/components/home/userModal";
-import { useEffect, useState } from "react";
-import axios from "axios";
 type User = {
   languageId: number;
   _id: string;
@@ -22,10 +20,10 @@ type User = {
 };
 
 export default function Home() {
-  const [userInfo, setUserInfo] = useState({} as User);
-  const [showUserModel, setShowUserModel] = useState(true);
-  const [submitButtonClicked, setSubmitButtonClicked] = useState(false);
-  const [stdin, setStdin] = useState("");
+  const [userInfo, setUserInfo] = React.useState({} as User);
+  const [showUserModel, setShowUserModel] = React.useState(true);
+  const [submitButtonClicked, setSubmitButtonClicked] = React.useState(false);
+  const [stdin, setStdin] = React.useState("");
   return (
     <main className=" h-full w-full">
       <Navbar

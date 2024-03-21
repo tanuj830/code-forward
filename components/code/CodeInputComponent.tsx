@@ -1,27 +1,15 @@
 import * as React from "react";
-import {
-  CodeIcon,
-  CodeSandboxLogoIcon,
-  MinusIcon,
-  PlayIcon,
-  PlusIcon,
-  SymbolIcon,
-} from "@radix-ui/react-icons";
-// import { Bar, BarChart, ResponsiveContainer } from "recharts"
+import { CodeIcon, PlayIcon, SymbolIcon } from "@radix-ui/react-icons";
 
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Badge } from "../ui/badge";
-import axios from "axios";
 
 interface CodeInputProps {
   setStdin: Function;
@@ -44,7 +32,6 @@ interface CodeInputProps {
 
 export function CodeInput({
   setSubmitButtonClicked,
-  userInfo,
   setStdin,
   submitButtonClicked,
 }: CodeInputProps) {

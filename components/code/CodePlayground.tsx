@@ -1,28 +1,8 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
 import { useTheme } from "next-themes";
 import axios from "axios";
-import { languages } from "@/constants/languages";
-import { encode, decode } from "js-base64";
-// import { userInfo } from "os";
-
 interface CodePlayProps {
-  // user: {
-  //   id: number;
-  //   _id: string;
-  //   name: string;
-  //   Date: string;
-  //   language: string;
-  //   userSubmisson: [
-  //     {
-  //       sourceCode: string;
-  //       output: string;
-  //       Date: string;
-  //     }
-  //   ];
-  //   syntax: string;
-  // };
   submitButtonClicked: Boolean;
   setSubmitButtonClicked: Function;
   setUserInfo: Function;
@@ -31,7 +11,6 @@ interface CodePlayProps {
 
 const CodePlayground: React.FC<CodePlayProps> = ({
   stdin,
-  setUserInfo,
   submitButtonClicked,
   setSubmitButtonClicked,
 }) => {
@@ -50,9 +29,6 @@ const CodePlayground: React.FC<CodePlayProps> = ({
   const handleCode = (value: any, event: any) => {
     setCode(value);
   };
-  //   output
-  // "SGVsbG8gV29ybGQK
-  // "
 
   if (submitButtonClicked === true && code) {
     const options = {
@@ -103,7 +79,6 @@ const CodePlayground: React.FC<CodePlayProps> = ({
             .then((res) => {
               console.log(res.data);
               setSubmitButtonClicked(false);
-              // console.log(output);
             });
         });
       }

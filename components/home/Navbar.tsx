@@ -1,21 +1,8 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { Combobox } from "../ui/combobox";
 import { ThemeButton } from "../theme/ThemeButton";
 import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
-import { PlayIcon } from "@radix-ui/react-icons";
 import { CodeInput } from "../code/CodeInputComponent";
-import { Toast } from "@radix-ui/react-toast";
-import { userInfo } from "os";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import UserDropDown from "./userDropDown";
 
 interface NavbarProps {

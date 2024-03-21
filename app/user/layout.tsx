@@ -1,8 +1,5 @@
 "use client";
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ThemeProvider } from "@/components/theme/theme-provider";
-import { Toaster } from "@/components/ui/toaster";
 import Navbar from "@/components/home/Navbar";
 import { useState } from "react";
 
@@ -13,7 +10,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [userInfo, setUserInfo] = useState({} as any);
-  const [showUserModel, setShowUserModel] = useState(true);
   const [submitButtonClicked, setSubmitButtonClicked] = useState(false);
   const stdin = () => {};
   return (
