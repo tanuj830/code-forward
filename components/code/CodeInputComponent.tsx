@@ -76,8 +76,7 @@ export function CodeInput({
                 </Button>
               </div>
               <span className="text-start text-xs text-muted-foreground mt-4">
-                For now you can only submit your code. Submitting code will
-                redirect you to your profile page.
+                For now you can only submit code.
               </span>
               <textarea
                 onChange={(e) => setStdin(e.target.value)}
