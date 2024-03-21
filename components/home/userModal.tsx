@@ -22,6 +22,7 @@ import { languages } from "@/constants/languages";
 import { Badge } from "../ui/badge";
 import axios from "axios";
 import { userInfo } from "os";
+import { SymbolIcon } from "@radix-ui/react-icons";
 
 interface UserModalProps {
   setUserInfo: Function;
@@ -36,6 +37,7 @@ const UserModal: React.FC<UserModalProps> = ({
 }) => {
   const [name, setName] = React.useState("");
   const [language, setLanguage] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
 
   React.useEffect(() => {
@@ -49,6 +51,7 @@ const UserModal: React.FC<UserModalProps> = ({
   }, [showUserModel]);
 
   const handleSubmit = (e: any) => {
+    setLoading(true);
     e.preventDefault();
     if (name.length > 0 && language.length > 0) {
       const result = { name: name, language: language };
@@ -65,7 +68,7 @@ const UserModal: React.FC<UserModalProps> = ({
           }
 
           // setUserInfo(res.data);
-
+          setLoading(false);
           setShowUserModel(false);
         });
     } else {
@@ -117,7 +120,14 @@ const UserModal: React.FC<UserModalProps> = ({
           </div>
         </CardContent>
         <CardFooter className="flex justify-end items-end">
-          <Button>Submit</Button>
+          <Button className="flex gap-2 items-center">
+            {loading === true ? (
+              <span className="animate-spin">
+                <SymbolIcon />
+              </span>
+            ) : null}
+            <span>Submit</span>
+          </Button>
         </CardFooter>
       </form>
     </Card>

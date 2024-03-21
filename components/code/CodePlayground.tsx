@@ -64,7 +64,7 @@ const CodePlayground: React.FC<CodePlayProps> = ({
       headers: {
         "content-type": "application/json",
         "Content-Type": "application/json",
-        "X-RapidAPI-Key": "bf0c75fb4amsh59e693748ea85b7p1271fajsn3b874788bc2e",
+        "X-RapidAPI-Key": "bbfa7e0a5emshf410d632b8544ddp1cca7ajsn107d922ac24c",
         "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
       },
       data: {
@@ -83,7 +83,7 @@ const CodePlayground: React.FC<CodePlayProps> = ({
           },
           headers: {
             "X-RapidAPI-Key":
-              "bf0c75fb4amsh59e693748ea85b7p1271fajsn3b874788bc2e",
+              "bbfa7e0a5emshf410d632b8544ddp1cca7ajsn107d922ac24c",
             "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
           },
         };

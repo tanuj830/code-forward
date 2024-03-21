@@ -68,9 +68,7 @@ const Navbar: React.FC<NavbarProps> = ({
               <div>
                 <Badge variant={"secondary"}>{language}</Badge>
               </div>
-              {/* <div className="flex justify-center items-center"> */}
               <UserDropDown name={name} />
-              {/* </div> */}
             </>
           ) : null}
           <div>
